@@ -8,7 +8,7 @@ function ProductDetails() {
 
   const [analytics, setAnalytics] = useState(null);
   const [product, setProduct] = useState(null);
-  const [history, setHistory] = useState([]);
+  
 
   useEffect(() => {
     fetchAllData();
@@ -31,7 +31,7 @@ function ProductDetails() {
         (a, b) => new Date(a.date) - new Date(b.date)
       );
 
-      setHistory(sortedHistory);
+      
 
     } catch (err) {
       console.log("Error:", err);
