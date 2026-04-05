@@ -16,13 +16,7 @@ function Dashboard() {
     alerts: 0,
     low_stock: 0
   });
-  const [user, setUser] = useState("");
 
-  useEffect(() => {
-    API.get("/me")
-      .then(res => setUser(res.data.username))
-      .catch(() => setUser("User"));
-  }, []);
 
   const [form, setForm] = useState({
     name: "",
