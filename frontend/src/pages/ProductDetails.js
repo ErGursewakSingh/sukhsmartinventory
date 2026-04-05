@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import API from "../services/api";
 import ProductChart from "../components/ProductChart";
@@ -8,16 +8,11 @@ function ProductDetails() {
 
   const [analytics, setAnalytics] = useState(null);
   const [product, setProduct] = useState(null);
-  
 
-  useEffect(() => {
-    fetchAllData();
-  }, []);
-
-  const fetchAllData = async () => {
+  // ✅ FIX: wrap in useCallback (required for ESLint)
+  const fetchAllData = useCallback(async () => {
     try {
       const res1 = await API.get("/products");
-      const res2 = await API.get(`/products/${id}/history`);
       const res3 = await API.get(`/products/${id}/analytics`);
 
       const foundProduct = res1.data.find(
@@ -27,24 +22,22 @@ function ProductDetails() {
       setProduct(foundProduct);
       setAnalytics(res3.data);
 
-      const sortedHistory = res2.data.sort(
-        (a, b) => new Date(a.date) - new Date(b.date)
-      );
-
-      
-
     } catch (err) {
       console.log("Error:", err);
     }
-  };
+  }, [id]); // ✅ dependency added
 
-  // ✅ USE BACKEND PREDICTION ONLY
+  // ✅ FIX: proper dependency
+  useEffect(() => {
+    fetchAllData();
+  }, [fetchAllData]);
+
+  // ---------------- HELPERS ----------------
   const getPrediction = () => {
     if (!analytics) return "Loading...";
     return `₹ ${analytics.prediction}`;
   };
 
-  // ✅ USE BACKEND RECOMMENDATION (DO NOT RE-CALCULATE)
   const getRecommendation = () => {
     if (!product || !analytics) return "Loading...";
 
