@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  /* 🌈 MODERN SOFT GRADIENT BACKGROUND */
+  background: linear-gradient(135deg, #e0f2fe, #f8fafc);
+
+  min-height: 100vh;
+}
+
+/* OPTIONAL: smooth text */
+* {
+  box-sizing: border-box;
+}
