@@ -14,9 +14,11 @@ function Navbar() {
       <div style={styles.container}>
 
         {/* LOGO */}
-        <h2 style={styles.logo}>
-          Sukh<span style={styles.logoAccent}>Smart</span>Inventory
-        </h2>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <h2 style={styles.logo}>
+            Sukh<span style={styles.logoAccent}>Smart</span>Inventory
+          </h2>
+        </Link>
 
         {/* RIGHT SIDE */}
         <div style={styles.right}>
@@ -70,7 +72,8 @@ const styles = {
     margin: 0,
     fontSize: "22px",
     fontWeight: "bold",
-    color: "#1e293b"
+    color: "#1e293b",
+    cursor: "pointer"
   },
 
   logoAccent: {
