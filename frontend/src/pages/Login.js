@@ -6,6 +6,7 @@ import { FaUser, FaLock } from "react-icons/fa";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -17,8 +18,8 @@ function Login() {
 
       // Save token
       localStorage.setItem("token", res.data.token);
-      setToken(true);
-      // Force redirect
+
+      // Redirect
       navigate("/dashboard");
 
     } catch (err) {
